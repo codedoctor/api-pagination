@@ -13,4 +13,4 @@ module.exports =
   toRest: (resultData,url) ->
     convertToRest(resultData,url)
 
-  parseInt: (data) -> parseMyInt(data)
+  parseInt: (someValue, def = 0) -> parseMyInt(someValue,def)
