@@ -4,6 +4,7 @@
 
 PagingUrlHelper = require './paging-url-helper'
 convertToRest = require './convert-to-rest'
+parseMyInt = require './parse-my-int'
 
 module.exports =
   pagingUrlHelper: (offset,count,totalCount,url) ->
@@ -11,3 +12,5 @@ module.exports =
 
   toRest: (resultData,url) ->
     convertToRest(resultData,url)
+
+  parseInt: (data) -> parseMyInt(data)
