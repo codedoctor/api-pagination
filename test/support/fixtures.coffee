@@ -16,3 +16,13 @@ module.exports =
     requestCount: 20
     requestOffset: 0
     totalCount: 1
+
+  resultData20request60offset205total: ->
+    items: [
+      'a','b','c','d','e','f','g','h','l','m'
+      'a','b','c','d','e','f','g','h','l','m'
+    ]
+    requestCount: 20
+    requestOffset: 60
+    totalCount: 205
+

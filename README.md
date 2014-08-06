@@ -11,6 +11,121 @@
 
 Helpers to provide pagination for APIs
 
+## So how does this work?
+
+The basic idea is that pagination is a tricky beast, better left to the server. There are a few different approaches to deal with pagination, including adding them to the header. This one is a bit different. We add a _pagination object that contains all the info needed. Here is a typical input and what comes out of it:
+
+```json
+{  
+   "items": ["a","b","c","d","e","f","g","h","l","m","a","b","c","d","e","f","g","h","l","m"],
+   "requestCount":20,
+   "requestOffset":60,
+   "totalCount":205
+}
+```
+
+result after conversion
+
+```json
+{  
+   "items":[  
+      "a",
+      "b",
+      "c",
+      "d",
+      "e",
+      "f",
+      "g",
+      "h",
+      "l",
+      "m",
+      "a",
+      "b",
+      "c",
+      "d",
+      "e",
+      "f",
+      "g",
+      "h",
+      "l",
+      "m"
+   ],
+   "_pagination":{  
+      "totalCount":205,
+      "requestCount":20,
+      "requestOffset":60,
+      "requestPageNumber":3,
+      "requestPageNumberDisplay":"4",
+      "totalPageCount":11,
+      "pagingKind":"paged",
+      "previousUrl":"http://www.hello.com:8012/my/rest?a=12&b=ss&offset=40&count=20",
+      "nextUrl":"http://www.hello.com:8012/my/rest?a=12&b=ss&offset=80&count=20",
+      "firstUrl":"http://www.hello.com:8012/my/rest?a=12&b=ss&offset=0&count=20",
+      "lastUrl":"http://www.hello.com:8012/my/rest?a=12&b=ss&offset=200&count=20",
+      "pages":[  
+         {  
+            "kind":"page",
+            "pageNumber":0,
+            "pageNumberDisplay":"1",
+            "url":"http://www.hello.com:8012/my/rest?a=12&b=ss&offset=0&count=20"
+         },
+         {  
+            "kind":"page",
+            "pageNumber":1,
+            "pageNumberDisplay":"2",
+            "url":"http://www.hello.com:8012/my/rest?a=12&b=ss&offset=20&count=20"
+         },
+         {  
+            "kind":"page",
+            "pageNumber":2,
+            "pageNumberDisplay":"3",
+            "url":"http://www.hello.com:8012/my/rest?a=12&b=ss&offset=40&count=20"
+         },
+         {  
+            "kind":"page",
+            "pageNumber":3,
+            "pageNumberDisplay":"4",
+            "url":"http://www.hello.com:8012/my/rest?a=12&b=ss&offset=60&count=20",
+            "active":true
+         },
+         {  
+            "kind":"page",
+            "pageNumber":4,
+            "pageNumberDisplay":"5",
+            "url":"http://www.hello.com:8012/my/rest?a=12&b=ss&offset=80&count=20"
+         },
+         {  
+            "kind":"page",
+            "pageNumber":5,
+            "pageNumberDisplay":"6",
+            "url":"http://www.hello.com:8012/my/rest?a=12&b=ss&offset=100&count=20"
+         },
+         {  
+            "kind":"page",
+            "pageNumber":6,
+            "pageNumberDisplay":"7",
+            "url":"http://www.hello.com:8012/my/rest?a=12&b=ss&offset=120&count=20"
+         },
+         {  
+            "kind":"page",
+            "pageNumber":7,
+            "pageNumberDisplay":"8",
+            "url":"http://www.hello.com:8012/my/rest?a=12&b=ss&offset=140&count=20"
+         },
+         {  
+            "kind":"separator"
+         },
+         {  
+            "kind":"page",
+            "pageNumber":10,
+            "pageNumberDisplay":"11",
+            "url":"http://www.hello.com:8012/my/rest?a=12&b=ss&offset=200&count=20"
+         }
+      ]
+   }
+}
+```
+
 
 ## See also
 

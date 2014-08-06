@@ -72,12 +72,12 @@ module.exports = class PagingUrlHelper
       result.push kind : 'separator' if startIndex > 1 # add a separator
 
       endIndex = startIndex + 6
-      endIndex = @lastPage - 1 if endIndex >= @lastPage()
+      endIndex = @_lastPage() - 1 if endIndex >= @_lastPage()
 
       for page in [startIndex .. endIndex]
         result.push createEntry(page)
 
-      result.push kind : 'separator' if endIndex < @lastPage() - 1 # add a separator
+      result.push kind : 'separator' if endIndex < @_lastPage() - 1 # add a separator
 
       # Add last page
       result.push createEntry(@_lastPage())

@@ -41,7 +41,111 @@
 <a href="https://www.npmjs.org/package/api-pagination"><img src="http://img.shields.io/npm/dm/api-pagination.svg" alt="NPM Downloads"></a>
 <a href="https://github.com/codedoctor/api-pagination/issues"><img src="http://img.shields.io/github/issues/codedoctor/api-pagination.svg" alt="Issues"></a>
 <a href="http://hapijs.com"><img src="http://img.shields.io/badge/hapi-6.0-blue.svg" alt="HAPI 6.0"></a>
-<a href="http://coffeedoc.info/github/codedoctor/api-pagination"><img src="http://img.shields.io/badge/API-Documentation-ff69b4.svg" alt="API Documentation"></a></p><p>(C) 2014 Martin Wawrusch</p><p>Helpers to provide pagination for APIs</p><h2 id="see-also">See also</h2>
+<a href="http://coffeedoc.info/github/codedoctor/api-pagination"><img src="http://img.shields.io/badge/API-Documentation-ff69b4.svg" alt="API Documentation"></a></p><p>(C) 2014 Martin Wawrusch</p><p>Helpers to provide pagination for APIs</p><h2 id="so-how-does-this-work-">So how does this work?</h2><p>The basic idea is that pagination is a tricky beast, better left to the server. There are a few different approaches to deal with pagination, including adding them to the header. This one is a bit different. We add a _pagination object that contains all the info needed. Here is a typical input and what comes out of it:</p><pre><code class="lang-json">{  
+   &quot;items&quot;: [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;e&quot;,&quot;f&quot;,&quot;g&quot;,&quot;h&quot;,&quot;l&quot;,&quot;m&quot;,&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;e&quot;,&quot;f&quot;,&quot;g&quot;,&quot;h&quot;,&quot;l&quot;,&quot;m&quot;],
+   &quot;requestCount&quot;:20,
+   &quot;requestOffset&quot;:60,
+   &quot;totalCount&quot;:205
+}
+</code></pre><p>result after conversion</p><pre><code class="lang-json">{  
+   &quot;items&quot;:[  
+      &quot;a&quot;,
+      &quot;b&quot;,
+      &quot;c&quot;,
+      &quot;d&quot;,
+      &quot;e&quot;,
+      &quot;f&quot;,
+      &quot;g&quot;,
+      &quot;h&quot;,
+      &quot;l&quot;,
+      &quot;m&quot;,
+      &quot;a&quot;,
+      &quot;b&quot;,
+      &quot;c&quot;,
+      &quot;d&quot;,
+      &quot;e&quot;,
+      &quot;f&quot;,
+      &quot;g&quot;,
+      &quot;h&quot;,
+      &quot;l&quot;,
+      &quot;m&quot;
+   ],
+   &quot;_pagination&quot;:{  
+      &quot;totalCount&quot;:205,
+      &quot;requestCount&quot;:20,
+      &quot;requestOffset&quot;:60,
+      &quot;requestPageNumber&quot;:3,
+      &quot;requestPageNumberDisplay&quot;:&quot;4&quot;,
+      &quot;totalPageCount&quot;:11,
+      &quot;pagingKind&quot;:&quot;paged&quot;,
+      &quot;previousUrl&quot;:&quot;http://www.hello.com:8012/my/rest?a=12&amp;b=ss&amp;offset=40&amp;count=20&quot;,
+      &quot;nextUrl&quot;:&quot;http://www.hello.com:8012/my/rest?a=12&amp;b=ss&amp;offset=80&amp;count=20&quot;,
+      &quot;firstUrl&quot;:&quot;http://www.hello.com:8012/my/rest?a=12&amp;b=ss&amp;offset=0&amp;count=20&quot;,
+      &quot;lastUrl&quot;:&quot;http://www.hello.com:8012/my/rest?a=12&amp;b=ss&amp;offset=200&amp;count=20&quot;,
+      &quot;pages&quot;:[  
+         {  
+            &quot;kind&quot;:&quot;page&quot;,
+            &quot;pageNumber&quot;:0,
+            &quot;pageNumberDisplay&quot;:&quot;1&quot;,
+            &quot;url&quot;:&quot;http://www.hello.com:8012/my/rest?a=12&amp;b=ss&amp;offset=0&amp;count=20&quot;
+         },
+         {  
+            &quot;kind&quot;:&quot;page&quot;,
+            &quot;pageNumber&quot;:1,
+            &quot;pageNumberDisplay&quot;:&quot;2&quot;,
+            &quot;url&quot;:&quot;http://www.hello.com:8012/my/rest?a=12&amp;b=ss&amp;offset=20&amp;count=20&quot;
+         },
+         {  
+            &quot;kind&quot;:&quot;page&quot;,
+            &quot;pageNumber&quot;:2,
+            &quot;pageNumberDisplay&quot;:&quot;3&quot;,
+            &quot;url&quot;:&quot;http://www.hello.com:8012/my/rest?a=12&amp;b=ss&amp;offset=40&amp;count=20&quot;
+         },
+         {  
+            &quot;kind&quot;:&quot;page&quot;,
+            &quot;pageNumber&quot;:3,
+            &quot;pageNumberDisplay&quot;:&quot;4&quot;,
+            &quot;url&quot;:&quot;http://www.hello.com:8012/my/rest?a=12&amp;b=ss&amp;offset=60&amp;count=20&quot;,
+            &quot;active&quot;:true
+         },
+         {  
+            &quot;kind&quot;:&quot;page&quot;,
+            &quot;pageNumber&quot;:4,
+            &quot;pageNumberDisplay&quot;:&quot;5&quot;,
+            &quot;url&quot;:&quot;http://www.hello.com:8012/my/rest?a=12&amp;b=ss&amp;offset=80&amp;count=20&quot;
+         },
+         {  
+            &quot;kind&quot;:&quot;page&quot;,
+            &quot;pageNumber&quot;:5,
+            &quot;pageNumberDisplay&quot;:&quot;6&quot;,
+            &quot;url&quot;:&quot;http://www.hello.com:8012/my/rest?a=12&amp;b=ss&amp;offset=100&amp;count=20&quot;
+         },
+         {  
+            &quot;kind&quot;:&quot;page&quot;,
+            &quot;pageNumber&quot;:6,
+            &quot;pageNumberDisplay&quot;:&quot;7&quot;,
+            &quot;url&quot;:&quot;http://www.hello.com:8012/my/rest?a=12&amp;b=ss&amp;offset=120&amp;count=20&quot;
+         },
+         {  
+            &quot;kind&quot;:&quot;page&quot;,
+            &quot;pageNumber&quot;:7,
+            &quot;pageNumberDisplay&quot;:&quot;8&quot;,
+            &quot;url&quot;:&quot;http://www.hello.com:8012/my/rest?a=12&amp;b=ss&amp;offset=140&amp;count=20&quot;
+         },
+         {  
+            &quot;kind&quot;:&quot;separator&quot;
+         },
+         {  
+            &quot;kind&quot;:&quot;page&quot;,
+            &quot;pageNumber&quot;:10,
+            &quot;pageNumberDisplay&quot;:&quot;11&quot;,
+            &quot;url&quot;:&quot;http://www.hello.com:8012/my/rest?a=12&amp;b=ss&amp;offset=200&amp;count=20&quot;
+         }
+      ]
+   }
+}
+</code></pre>
+<h2 id="see-also">See also</h2>
 <ul>
 <li><a href="https://github.com/codedoctor/hapi-auth-bearer-mw">hapi-auth-bearer-mw</a></li>
 <li><a href="https://github.com/codedoctor/hapi-identity-store">hapi-identity-store</a></li>
@@ -70,7 +174,7 @@
       </div>
     </div>
     <div id='footer'>
-  August 06, 14 15:28:34 by
+  August 06, 14 16:02:59 by
   <a href='https://github.com/coffeedoc/codo' title='CoffeeScript API documentation generator'>
     Codo
   </a>

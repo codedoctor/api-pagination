@@ -12,6 +12,7 @@
   },
   "description": "Provides API endpoints for HAPI servers to manage roles. DO NOT USE YET",
   "dependencies": {
+    "hoek": ">=2.3.0",
     "underscore": ">=1.6.0"
   },
   "devDependencies": {
