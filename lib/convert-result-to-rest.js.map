@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "convert-result-to-rest.js",
+  "sourceRoot": "../src/",
+  "sources": [
+    "convert-result-to-rest.coffee"
+  ],
+  "names": [],
+  "mappings": "AAgDkC;AAAA;AAAA"
+}

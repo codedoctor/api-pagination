@@ -3,58 +3,62 @@ url = require 'url'
 
 
 module.exports = class PagingUrlHelper
-  constructor: (@offset,@count,@totalCount,@url) ->
-
+  constructor: (@requestOffset,@requestCount,@totalCount,@requestUrl) ->
 
   _currentPage: () =>
-    Math.floor(@offset / @count)
+    Math.floor(@requestOffset / @requestCount)
 
   _makeUrl: (newOffset,newCount) =>
-    rurl = @url # should clone
+    rurl = url.parse(url.format(@requestUrl),true)
+
     rurl.search = null # IMPORTANT
+
     rurl.query.offset = newOffset
     rurl.query.count = newCount
     url.format(rurl)
 
   _numberOfPages: =>
-    Math.floor((@totalCount - 1) / @count) + 1
+    Math.floor((@totalCount - 1) / @requestCount) + 1
 
   _lastPage: =>
     @_numberOfPages() - 1
 
   first: =>
-    @_makeUrl 0, @count
+    return null if @totalCount is 0
+    @_makeUrl 0, @requestCount
 
   last: =>
-    lastPageOffset = @_lastPage() * @count 
+    return null if @totalCount is 0
+    lastPageOffset = @_lastPage() * @requestCount 
     #lastPageOffset = lastPageOffset - 1 if lastPageOffset is @totalCount
-    @_makeUrl lastPageOffset, @count
+    @_makeUrl lastPageOffset, @requestCount
 
   next: =>
     nextPage = @_currentPage() + 1
-    return null if nextPage > @_lastPage()
-    @_makeUrl nextPage * @count, @count
+    return null if nextPage > @_lastPage() or @totalCount is 0
+    @_makeUrl nextPage * @requestCount, @requestCount
 
 
   previous: =>
     nextPage = @_currentPage() - 1
-    return null if nextPage < 0
-    @_makeUrl nextPage * @count, @count
+    return null if nextPage < 0 or @totalCount is 0
+    @_makeUrl nextPage * @requestCount, @requestCount
 
   pages: =>
-    result = []
+    return [] if @_numberOfPages() < 1
 
     createEntry = (pageNumber) =>
       x = 
         kind: 'page'
         pageNumber: pageNumber
         pageNumberDisplay: (pageNumber + 1).toString()
-        url: @_makeUrl pageNumber * @count, @count
+        url: @_makeUrl pageNumber * @requestCount, @requestCount
 
       x.active = true if pageNumber is @_currentPage()
 
       return x
 
+    result = []
 
     if @_numberOfPages() <= 9
       for pageNumber in [0 .. @_numberOfPages() - 1]
@@ -80,22 +84,3 @@ module.exports = class PagingUrlHelper
 
     result
 
-  convertToRest: (resultData = {}) =>
-    pp = this
-
-    resultData._pagination =
-      totalCount : resultData.totalCount
-      requestCount : resultData.requestCount
-      requestOffset: resultData.requestOffset
-      requestPageNumber: pp._currentPage()
-      requestPageNumberDisplay: (pp._currentPage() + 1).toString()
-      totalPageCount: pp._numberOfPages()
-      pagingKind: "paged"
-      previousUrl: pp.previous()
-      nextUrl: pp.next()
-      firstUrl: pp.first()
-      lastUrl: pp.last()
-      pages: pp.pages() 
-    delete resultData.base
-    delete resultData.baseUrl
-    return resultData

@@ -3,6 +3,11 @@
 ###
 
 PagingUrlHelper = require './paging-url-helper'
+convertToRest = require './convert-to-rest'
 
-module.exports.pagingUrlHelper = (offset,count,totalCount,url) ->
-  return new PagingUrlHelper(offset,count,totalCount,url)
+module.exports =
+  pagingUrlHelper: (offset,count,totalCount,url) ->
+    return new PagingUrlHelper(offset,count,totalCount,url)
+
+  toRest: (resultData) ->
+    convertToRest(resultData)
