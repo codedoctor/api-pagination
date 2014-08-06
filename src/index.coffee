@@ -9,5 +9,5 @@ module.exports =
   pagingUrlHelper: (offset,count,totalCount,url) ->
     return new PagingUrlHelper(offset,count,totalCount,url)
 
-  toRest: (resultData) ->
-    convertToRest(resultData)
+  toRest: (resultData,url) ->
+    convertToRest(resultData,url)

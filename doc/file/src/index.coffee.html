@@ -46,8 +46,8 @@
   pagingUrlHelper: function(offset, count, totalCount, url) {
     return new PagingUrlHelper(offset, count, totalCount, url);
   },
-  toRest: function(resultData) {
-    return convertToRest(resultData);
+  toRest: function(resultData, url) {
+    return convertToRest(resultData, url);
   }
 }</code></pre>
     
@@ -55,7 +55,7 @@
 </dl>
     </div>
     <div id='footer'>
-  August 06, 14 16:02:59 by
+  August 06, 14 16:27:41 by
   <a href='https://github.com/coffeedoc/codo' title='CoffeeScript API documentation generator'>
     Codo
   </a>
