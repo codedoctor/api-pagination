@@ -4,7 +4,6 @@
 [![Dependency Status](https://gemnasium.com/codedoctor/api-pagination.svg)](https://gemnasium.com/codedoctor/api-pagination)
 [![NPM Downloads](http://img.shields.io/npm/dm/api-pagination.svg)](https://www.npmjs.org/package/api-pagination)
 [![Issues](http://img.shields.io/github/issues/codedoctor/api-pagination.svg)](https://github.com/codedoctor/api-pagination/issues)
-[![HAPI 6.0](http://img.shields.io/badge/hapi-6.0-blue.svg)](http://hapijs.com)
 [![API Documentation](http://img.shields.io/badge/API-Documentation-ff69b4.svg)](http://coffeedoc.info/github/codedoctor/api-pagination)
 
 (C) 2014 Martin Wawrusch
@@ -130,19 +129,24 @@ result after conversion
 ## See also
 
 * [hapi-auth-bearer-mw](https://github.com/codedoctor/hapi-auth-bearer-mw)
-* [hapi-identity-store](https://github.com/codedoctor/hapi-identity-store)
+* [hapi-loggly](https://github.com/codedoctor/hapi-loggly)
+* [hapi-mandrill](https://github.com/codedoctor/hapi-mandrill)
 * [hapi-mongoose-db-connector](https://github.com/codedoctor/hapi-mongoose-db-connector)
+* [hapi-oauth-store-multi-tenant](https://github.com/codedoctor/hapi-oauth-store-multi-tenant)
 * [hapi-routes-authorization-and-session-management](https://github.com/codedoctor/hapi-routes-authorization-and-session-management)
-* [hapi-routes-status](https://github.com/codedoctor/hapi-routes-status)
-* [hapi-routes-users](https://github.com/codedoctor/hapi-routes-users)
-* [hapi-routes-users-authorizations](https://github.com/codedoctor/hapi-routes-users-authorizations)
+* [hapi-routes-oauth-management](https://github.com/codedoctor/hapi-routes-oauth-management)
 * [hapi-routes-roles](https://github.com/codedoctor/hapi-routes-roles)
+* [hapi-routes-status](https://github.com/codedoctor/hapi-routes-status)
+* [hapi-routes-users-authorizations](https://github.com/codedoctor/hapi-routes-users-authorizations)
+* [hapi-routes-users](https://github.com/codedoctor/hapi-routes-users)
+* [hapi-user-store-multi-tenant](https://github.com/codedoctor/hapi-user-store-multi-tenant)
 
 and additionally
 
-* [mongoose-identity-store-multi-tenant](https://github.com/codedoctor/mongoose-identity-store-multi-tenant)
-* [mongoose-rest-helper](https://github.com/codedoctor/mongoose-rest-helper)
 * [api-pagination](https://github.com/codedoctor/api-pagination)
+* [mongoose-oauth-store-multi-tenant](https://github.com/codedoctor/mongoose-oauth-store-multi-tenant)
+* [mongoose-rest-helper](https://github.com/codedoctor/mongoose-rest-helper)
+* [mongoose-user-store-multi-tenant](https://github.com/codedoctor/mongoose-user-store-multi-tenant)
 
 
 ## Contributing
